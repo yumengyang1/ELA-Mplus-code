@@ -1,0 +1,116 @@
+data:file is participant_final_0to2_5885_behavior_winsor4(1).csv;
+variable:names are id
+site_id0
+f_id0
+race
+sex
+age0
+age2
+age3
+s_type2
+motion2
+income
+highest_edu
+CONaglh2
+CONagrh2
+CONhplh2
+CONhprh2
+CONaglh0
+CONagrh0
+CONhplh0
+CONhprh0
+RTNaglh2
+RTNagrh2
+RTNhplh2
+RTNhprh2
+RTNaglh0
+RTNagrh0
+RTNhplh0
+RTNhprh0
+inter
+socio
+conflict
+neighbor
+pm
+poverty
+intern0
+extern0
+intern3
+extern3
+cryst0u
+cryst2u
+fluid0u
+fluid2u
+ples3
+ples0
+total2
+total0
+appraisal
+suppression;
+usevar are site_id0
+race
+sex
+age2
+s_type2
+motion2
+CONaglh2
+CONaglh0
+conflict
+inter
+socio
+neighbor
+pm
+poverty
+income
+highest_edu
+cryst0u
+cryst2u
+weight;
+missing=all(999);
+weight=weight;
+cluster=site_id0;
+define:
+weight=1;
+analysis:estimator=ml;
+repse=bootstrap;
+bootstrap=5000(residual);
+information=observed;
+type=complex;
+processor=8;
+iterations=30000;
+model:
+CONaglh2 on conflict
+            inter
+            socio
+            neighbor
+            pm
+            poverty
+            CONaglh0 race sex age2 s_type2 motion2;
+cryst2u on CONaglh2
+           conflict
+            inter
+            socio
+            neighbor
+            pm
+            poverty
+            race sex age2 income highest_edu cryst0u;
+inter on poverty;
+race;
+sex;
+age2;
+s_type2;
+motion2;
+CONaglh0;
+conflict;
+socio;
+neighbor;
+pm;
+poverty;
+income;
+highest_edu;
+cryst0u;
+model indirect:
+cryst2u ind CONaglh2 inter poverty;
+cryst2u ind CONaglh2 poverty;
+cryst2u ind inter poverty;
+output:stand cint(bcbootstrap) residual;

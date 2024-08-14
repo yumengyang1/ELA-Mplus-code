@@ -1,0 +1,227 @@
+data:file is participant_final_0to2_5885_behavior_winsor4(1).csv;
+variable:names are id
+site_id0
+f_id0
+race
+sex
+age0
+age2
+age3
+age4
+s_type2
+motion2
+CONw2
+CON_DMN2
+CON_FPN2
+DMNw2
+DMN_FPN2
+SN_CON2
+SN_DMN2
+SN_FPN2
+SNw2
+FPNw2
+CONw0
+CON_DMN0
+CON_FPN0
+DMNw0
+DMN_FPN0
+FPNw0
+SN_CON0
+SN_DMN0
+SN_FPN0
+SNw0
+CONaglh2
+CONagrh2
+CONhplh2
+CONhprh2
+DMNaglh2
+DMNagrh2
+DMNhplh2
+DMNhprh2
+FPNaglh2
+FPNagrh2
+FPNhplh2
+FPNhprh2
+SNaglh2
+SNagrh2
+SNhplh2
+SNhprh2
+CONaglh0
+CONagrh0
+CONhplh0
+CONhprh0
+DMNaglh0
+DMNagrh0
+DMNhplh0
+DMNhprh0
+FPNaglh0
+FPNagrh0
+FPNhplh0
+FPNhprh0
+SNaglh0
+SNagrh0
+SNhplh0
+SNhprh0
+died
+friend
+financial
+argue
+job
+away
+arrest
+friend_died
+sib
+separ
+school
+move
+jail
+step
+new_job
+new_sib
+t_unpre
+inter
+socio
+conflict
+fst_dep
+neighbor
+pm
+crpbi
+poverty
+rulebre2
+aggres2
+intern2
+extern2
+depres2
+anxdis2
+rulebre3
+aggres3
+intern3
+extern3
+depres3
+anxdis3
+rulebre4
+aggres4
+intern4
+extern4
+depres4
+anxdis4
+rulebre0
+aggres0
+intern0
+extern0
+depres0
+anxdis0
+picvocab0
+flanker0
+list0
+cardsort0
+pattern0
+picture0
+reading0
+fluidcomp0
+cryst0
+totalcomp0
+picvocab4
+flanker4
+list4
+cardsort4
+pattern4
+picture4
+reading4
+fluidcomp4
+cryst4
+totalcomp4
+picvocab2
+flanker2
+list2
+cardsort2
+pattern2
+picture2
+reading2
+fluidcomp2
+cryst2
+totalcomp2
+fluid_c2
+fluid_c0
+intern0_r
+extern0_r
+intern3_r
+extern3_r
+prnt_ed
+prtnr_ed
+income
+highest_edu
+cryst0u
+cryst2u
+fluid0u
+fluid2u;
+usevar are site_id0
+race
+sex
+age2
+s_type2
+motion2
+CONaglh2
+CONaglh0
+conflict
+inter
+socio
+neighbor
+pm
+poverty
+income
+highest_edu
+cryst0u
+cryst2u
+weight;
+missing=all(999);
+weight=weight;
+cluster=site_id0;
+define:
+weight=1;
+analysis:estimator=ml;
+repse=bootstrap;
+bootstrap=5000(residual);
+information=observed;
+type=complex;
+processor=8;
+iterations=30000;
+model:
+CONaglh2 on conflict
+            inter
+            socio
+            neighbor
+            pm
+            poverty
+            CONaglh0 race sex age2 s_type2 motion2;
+cryst2u on CONaglh2
+           conflict
+            inter
+            socio
+            neighbor
+            pm
+            poverty
+            race sex age2 income highest_edu cryst0u;
+race;
+sex;
+age2;
+s_type2;
+motion2;
+CONaglh0;
+conflict;
+inter;
+socio;
+neighbor;
+pm;
+poverty;
+income;
+highest_edu;
+cryst0u;
+model indirect:
+cryst2u ind CONaglh2 conflict;
+cryst2u ind CONaglh2 inter;
+cryst2u ind CONaglh2 socio;
+cryst2u ind CONaglh2 neighbor;
+cryst2u ind CONaglh2 pm;
+cryst2u ind CONaglh2 poverty;
+output:stand cint(bcbootstrap) residual;
